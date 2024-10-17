@@ -1,3 +1,8 @@
+<?php
+    $opcionSeleccionada = $_POST['opcion'];
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -68,11 +73,31 @@
             }
             
         }
+        .n3 {
+            gap: 1%;
+            button{
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            width: 50%;
+            margin: 4%;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            }
+        }
     </style>
 </head>
 <body>
     <section class="code">
+        
         <div class="container">
+            <div class="n3"></div>
             <div class="n1"></div>
             <div class="n2"></div>
         </div>
@@ -83,59 +108,102 @@
 </html>
 <script>
     document.addEventListener("DOMContentLoaded", () => {
+        var opcion = "<?php echo $opcionSeleccionada; ?>";
+        let num1;
+        let num2;
+        let intervalId1;
+        let intervalId2;
+
+        const n1 =document.querySelector(".n1")
+        const img1= crear("img");
+        const n2 =document.querySelector(".n2")
+        const img2= crear("img");
+        const ini = crear("button");
+        const iniciar = document.querySelector(".start");
+        const comp = crear("button");
+        const end =document.querySelector(".start");
+        const n3 =document.querySelector(".n3")
+        const piedra = crear("button");
+        const papel = crear("button");
+        const tijera = crear("button");
         function crear(element) {
             return document.createElement(element);
         }
+        if (opcion=="rm") {
+            codigo()
+        }else{
+            startAnimation2() 
+            crearJugador2()
+            botones()
+            opciones()
+            papel.addEventListener('click',()=>{crearJugador1(); img1.src = `img/${1}.png`;})
+            piedra.addEventListener('click',()=>{crearJugador1(); img1.src = `img/${2}.png`;})
+            tijera.addEventListener('click',()=>{crearJugador1(); img1.src = `img/${3}.png`;})
+        }
+        
         //variables y funciones para la animacion
-        let num1;
-        let num2;
-        let intervalId;
-        function startAnimation() {
-            intervalId = setInterval(() => {
+        
+        function startAnimation1() {
+            intervalId1 = setInterval(() => {
                 num1 = Math.floor(Math.random() * 3) + 1;
                 img1.src = `img/${num1}.png`;
+            }, 20);
+        }
+        function startAnimation2() {
+            intervalId2 = setInterval(() => {
                 num2 = Math.floor(Math.random() * 3) + 1;
                 img2.src = `img/${num2}.png`;
             }, 20);
         }
-        function stopAnimation() {
-            clearInterval(intervalId);
+        function stopAnimation1() {
+            clearInterval(intervalId1);
         }
-
-        //variables jugador 1
-        const n1 =document.querySelector(".n1")
-        const img1= crear("img");
-        img1.src="img/1.png"
-        n1.append(img1);
-
-        //variables jugador 2
-        const n2 =document.querySelector(".n2")
-        const img2= crear("img");
-        img2.src="img/2.png"
-        n2.append(img2);
-
-        
-        //Creamos el boton y la funcion para iniciar
-        const ini = crear("button");
-        ini.textContent = "INICIAR";
-        const iniciar = document.querySelector(".start");
-        iniciar.append(ini);
-        
+        function stopAnimation2() {
+            clearInterval(intervalId2);
+        }
+        function crearJugador1() {
+            //variables jugador 1
+            img1.src="img/1.png"
+            n1.append(img1);
+        }
+        function crearJugador2() {
+            //variables jugador 2
+            img2.src="img/2.png"
+            n2.append(img2);
+        }
+        function botones(){
+            ini.textContent = "INICIAR";
+            iniciar.append(ini);
+            //Creamos el boton y la funcion para comprobar
+            comp.textContent = "Comprobar";
+            end.append(comp);
+        }
+        function opciones(){
+            piedra.textContent = "PIEDRA";
+            n3.append(piedra);
+            papel.textContent = "PAPEL";
+            n3.append(papel);
+            tijera.textContent = "TIJERA";
+            n3.append(tijera);
+        }
+        function codigo(){
+            crearJugador1()
+            crearJugador2()
+            botones()
+        }
         ini.addEventListener('click',()=>{
-            startAnimation();
+            startAnimation1();
+            startAnimation2() 
             
         })
         ini.addEventListener('dblclick',()=>{
             stopAnimation()
         })
-
-        //Creamos el boton y la funcion para comprobar
-        const comp = crear("button");
-        comp.textContent = "Comprobar";
-        const end =document.querySelector(".start");
-        end.append(comp);
+        
+        
         
         comp.addEventListener('click',()=>{
+            stopAnimation()
             stopAnimation()
             comparar()
         })
@@ -146,19 +214,19 @@
         function comparar() {
             if (num1 !== undefined && num2 !== undefined) {
                     if (num1 === num2) {
-                        document.write("Empate"); 
+                        alert("Empate"); 
                     } else if (num1 === 1 && num2 === 2) {
-                        document.write("El ganador es Jugador 1 (Papel)"); 
+                        alert("El ganador es Jugador 1 (Papel)"); 
                     } else if (num1 === 2 && num2 === 3) {
-                        document.write("El ganador es Jugador 1 (Piedra)"); 
+                        alert("El ganador es Jugador 1 (Piedra)"); 
                     } else if (num1 === 3 && num2 === 1) {
-                        document.write("El ganador es Jugador 1 (Tijeras)"); 
+                        alert("El ganador es Jugador 1 (Tijeras)"); 
                     } else if (num1 === 2 && num2 === 1) {
-                        document.write("El ganador es Jugador 2 (Papel)"); 
+                        alert("El ganador es Jugador 2 (Papel)"); 
                     } else if (num1 === 3 && num2 === 2) {
-                        document.write("El ganador es Jugador 2 (Piedra)"); 
+                        alert("El ganador es Jugador 2 (Piedra)"); 
                     } else if (num1 === 1 && num2 === 3) {
-                        document.write("El ganador es Jugador 2 (Tijeras)"); 
+                        alert("El ganador es Jugador 2 (Tijeras)"); 
                     }
                 }
             // img1.src = `img/${num1}.png`;
