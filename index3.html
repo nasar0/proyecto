@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://bootswatch.com/5/vapor/bootstrap.min.css">
+    <style>
+        li{
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            border: solid 1px violet;
+            background-color: rgb(95, 0, 0);
+            color: white;
+            padding: 1%;
+            
+        }
+        .estilo{
+            background-color: green;
+            text-decoration:line-through;
+        }
+    </style>
+</head>
+<body>
+    <div class="container border p-5">
+        <div class="tareas row p-2">
+            <div class="col-md-6 offset-md-3">
+                <input type="text" placeholder="Añadir tareas" class="form-control">
+                <br>
+                <input type="search" name="buscador" id="" placeholder="Buscar..." class="form-control">
+                <button class="btn btn-primary my-3 col-md-4 offset-md-8 rounded-5">Añadir tarea</button>
+                <div class="listaTareas">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded",()=>{
+
+        let input = document.querySelector("div.tareas input");
+        let boton = document.querySelector("div.tareas button");
+        let listaTareas = document.querySelector("div.listaTareas");
+        let buscar =document.querySelector("div.tareas input:nth-child(3)")
+        
+        function busca(input) {
+            if (input.value.trim() != "") {
+                let tarea = input.value.trim();
+                let listas =document.querySelectorAll("li")
+                listas.forEach(lista => {
+                    let array=lista.textContent.split("X");
+                    console.log(array[0]);
+                    if (!array[0].toLowerCase().includes(tarea)) {
+                        lista.style.display = 'none';
+                    } else {
+                        lista.style.display = ''; 
+                    }
+                    
+                });
+            }
+        }
+
+        buscar.addEventListener('keydown',(e)=>{
+            if (e.key ==='Enter') {
+                busca(buscar)
+            }
+        });
+
+        let ul = crearElemeto("ul");
+        function limpiar(element) {
+            element.value="";
+            element.focus();
+        }
+        function crearElemeto(element){
+            return document.createElement(element)
+        }
+        function code(input){
+            if (input.value.trim() != "") {
+                let tarea = input.value.trim();
+                let li = crearElemeto("li");
+                let boton=crearElemeto("button")
+                li.textContent =tarea;
+                boton.textContent ="X";
+                boton.addEventListener("click",()=> {
+                    li.remove();
+                });
+                ul.append(li);
+                listaTareas.append(ul);
+                li.append(boton)
+                limpiar(input);
+                li.addEventListener("click",()=>{li.classList.toggle("estilo")});
+            }
+            
+
+            
+        }
+        
+        boton.addEventListener("click",()=>{
+            code(input);
+        });
+        input.addEventListener('keydown',(e)=>{
+            if (e.key ==='Enter') {
+                code(input);
+            }
+        })
+
+    })
+</script>
+</html>

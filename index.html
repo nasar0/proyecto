@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="n1"> </div>
+    <div class="n1"> </div>
+</body>
+</html>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        function crear(element) {
+            return document.createElement(element);
+        }
+        const img = crear("img");
+        img.src ="img/2.png" ;
+        document.n1.appendChild(img); 
+        crear("button"); 
+        
+        const j1 = crear("button"); 
+        j1.textContent = "Jugador1"; 
+        document.n1.appendChild(j1); 
+
+        img.src ="img/2.png" ;
+        document.n2.appendChild(img); 
+        const j2 = crear("button"); 
+        j2.textContent = "Jugador2"; 
+        document.n2.appendChild(j2); 
+
+    });
+</script>

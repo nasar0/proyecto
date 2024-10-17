@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        a{
+            text-decoration: none;
+            margin: 20px 0;
+            color: white;
+            text-transform: uppercase;
+            font-weight: bold;
+            &:nth-child(2){
+                margin-top: 50px;
+            }
+            &:hover{
+                background-color: rgb(55, 98, 117);
+                color: white;
+            }
+        }
+        
+        body{
+            font-size: 15px;
+            font-family: "system-ui";
+        }
+
+        header#header{
+            padding: 50px;
+            box-shadow: 0 0 10px rgb(0, 0, 0);
+            div.brand{
+                h1,h2{
+                    font-size: 2rem;
+                    span{
+                        color: rgb(255, 123, 0);
+                    }
+                }
+            }
+
+            nav.nav{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                    div.menu{
+                        text-align: right;
+                        button{
+                            font-size: 2rem;
+                            background-color: transparent;
+                            border: none;
+                            color: rgb(216, 4, 4);
+                            
+                        }
+                        div.navbar{
+                            display: flex;
+                            text-align: center;
+                            padding: 20px;
+                            flex-flow: column;
+                            min-height: 100vh; 
+                            color: white;
+                            background: rgb(0, 0, 0);
+                            min-width: 15%;
+                            position: fixed; 
+                            top: 0;
+                            left: 85%;
+                            z-index: 999;
+                            transition: opacity 0.5s ease, visibility 0.5s ease;
+                            opacity: 0;
+                            visibility: hidden;
+                            h2{
+                                span{
+                                    color:rgb(255, 123, 0);
+                                }
+                            }
+                        }
+                        .navbar.show {
+                            opacity: 1;
+                            visibility: visible;
+                        }
+                        .navbar h2{
+                            font-size: 40px;
+
+                        }
+                }
+            }
+        }
+    @media (max-width: 1200px) {
+        .navbar {
+            width: 100% !important; 
+            left: 0 !important; 
+        }
+    }
+
+      
+    </style>
+</head>
+<body>
+    <header id="header">
+        <nav class="nav">
+            <div class="brand">
+                <h1><span>X</span>prompt</h1>
+            </div>
+            <div class="menu">
+                <button>&#x268C;</button>
+                <div class="navbar">
+                    <button>&#10006;</button>
+                    <br>
+                    <h2><span>X</span>prompt</h2>
+                    <a href="#">Home</a>
+                    <a href="#">Servicios</a>
+                    <a href="#">Proyectos</a>
+                    <a href="#">Soporte</a>
+                    <a href="#">Contacto</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <script>
+        
+        document.addEventListener("DOMContentLoaded", () => {       // Espera a que el DOM se haya cargado completamente
+            let navbar = document.getElementsByClassName("navbar")[0];      // Selecciona la barra de navegación
+            let menu = document.querySelector("div.menu button");       // Selecciona el botón del menú
+            let cerrar = document.querySelector("div.navbar");      // Selecciona la barra de navegación para el evento de cerrar
+    
+            navbar.classList.remove("show");        // Asegúrate de que la barra de navegación esté oculta al inicio
+    
+            
+            menu.addEventListener("click", () => {      // Agrega un evento click al botón del menú
+                navbar.classList.add("show");       // Muestra la barra de navegación al hacer clic en el menú
+                menu.style.display = "none";        // Oculta el botón del menú
+            });
+    
+            
+            cerrar.addEventListener("click", () => {        // Agrega un evento click a la barra de navegación para cerrarla
+                navbar.classList.remove("show");        // Oculta la barra de navegación
+                menu.style.display = "";        // Vuelve a mostrar el botón del menú
+            });
+    
+            cerrar.addEventListener("mouseleave", () => {            // Agrega un evento mouseleave a la barra de navegación para cerrarla
+                navbar.classList.remove("show");                // Oculta la barra de navegación
+                menu.style.display = "";                 // Vuelve a mostrar el botón del menú
+
+            });
+        });
+    </script>
+    
+</body>
+</html>
