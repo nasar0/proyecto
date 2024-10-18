@@ -146,23 +146,24 @@
         function comparar() {
             if (num1 !== undefined && num2 !== undefined) {
                     if (num1 === num2) {
-                        document.write("Empate"); 
+                        alert("Empate"); 
                     } else if (num1 === 1 && num2 === 2) {
-                        document.write("El ganador es Jugador 1 (Papel)"); 
+                        alert("El ganador es Jugador 1 (Papel)"); 
                     } else if (num1 === 2 && num2 === 3) {
-                        document.write("El ganador es Jugador 1 (Piedra)"); 
+                        alert("El ganador es Jugador 1 (Piedra)"); 
                     } else if (num1 === 3 && num2 === 1) {
-                        document.write("El ganador es Jugador 1 (Tijeras)"); 
+                        alert("El ganador es Jugador 1 (Tijeras)"); 
                     } else if (num1 === 2 && num2 === 1) {
-                        document.write("El ganador es Jugador 2 (Papel)"); 
+                        alert("El ganador es Jugador 2 (Papel)"); 
                     } else if (num1 === 3 && num2 === 2) {
-                        document.write("El ganador es Jugador 2 (Piedra)"); 
+                        alert("El ganador es Jugador 2 (Piedra)"); 
                     } else if (num1 === 1 && num2 === 3) {
-                        document.write("El ganador es Jugador 2 (Tijeras)"); 
+                        alert("El ganador es Jugador 2 (Tijeras)"); 
                     }
                 }
-            // img1.src = `img/${num1}.png`;
-            // img2.src = `img/${num2}.png`;
+            img1.src = `img/${num1}.png`;
+            img2.src = `img/${num2}.png`;
+            stopAnimation()
         }
     });
 </script>
